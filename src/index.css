@@ -1,8 +1,8 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -48,22 +48,19 @@ box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
   height: 100vh; 
  
 }
-.dashboard-items{
-  display: flex;
-  justify-content: space-between;
-  margin-left: 5px;
-}
-.grid-1{
-  border-right: 1px solid #fff;
-  height: 100vh;
- width: 300px;
- 
-}
-.grid-1 div{
-  display: flex;
- flex-direction: column;
- align-items: center;
-}
-.grid-1 div button{
+.feature-1{
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
   margin: 5px;
+  padding-top:60px;
+  padding-bottom:60px;
+  cursor: pointer;
+}
+.feature-1 img{
+  height: 150px;
+  width: 150px;
+}
+.feature-title{
+  color: #fff;
 }
