@@ -11,3 +11,59 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.login-form{
+  position: relative;
+  top: 20%;
+  background: #fff;
+  width:30%;
+  border-radius: 5px;
+  padding-top: 77px;
+  padding-bottom: 77px;
+  -webkit-box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+}
+.login-form form input{
+  margin: 10px;
+  padding: 5px;
+  width: 50%;
+
+
+}
+.login-container{
+  background: #282D50;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #202342, #282D50);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #202342, #282D50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100vh; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+
+}
+.dashboard{
+  color: #fff;
+  background: #282D50;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #202342, #282D50);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #202342, #282D50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100vh; 
+ 
+}
+.dashboard-items{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5px;
+}
+.grid-1{
+  border-right: 1px solid #fff;
+  height: 100vh;
+ width: 300px;
+ 
+}
+.grid-1 div{
+  display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+.grid-1 div button{
+  margin: 5px;
+}
