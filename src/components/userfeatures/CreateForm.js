@@ -3,80 +3,72 @@ import { useSelector } from 'react-redux'
 import TextInput from './form elements/TextInput'
 import { addData } from '../../features-redux/BuildFormData'
 import { useDispatch } from 'react-redux'
-import { Button, Row,Col } from 'antd'
+import { Button, Row,Col, Input,Select } from 'antd'
 import Chekbox from './form elements/Chekbox'
 import { useNavigate } from 'react-router-dom'
-
+const { Option, OptGroup } = Select;
 const CreateForm = () => {
   const [url,setUrl]=useState('')
   const [myPost,setMyPost]=useState(false)
-  const formData=useSelector((state)=>state.formBuild.value)
   const [select,setSelect]=useState([])
+  const [title,setTitle]=useState()
+  const [window,setWindow]=useState(false)
+  const [selectBox,setSelectBox]=useState()
   const [optionText,setOptionText]=useState()
   const[option,setOption]=useState([])
-  const[inputTextField,setInputTextField]=useState(false)
-  const[checkBoxwindow,setcheckBoxwindow]=useState(false)
   const navigate=useNavigate()
   const [textData,setTextData]=useState()
+  const [id,setId]=useState(0)
   const dispatch=useDispatch()
-  const passData=()=>{
-    setInputTextField(true)
+
+  const handleChange=(value)=>{
+    setSelectBox(value)
   }
-  const setcheckBoxwindowBool=()=>{
-    setcheckBoxwindow(true)
+
+  const setWindowOption=()=>{
+    setWindow(true)
   }
-  const addText=()=>{
-    const elem={
-      type:'text',
-      field:textData
-    }
-   setSelect([...select,elem])
-   setInputTextField(false)
-  }
+ 
   const addOption=()=>{
     setOption([...option,optionText])
-    console.log(option)
+    setOptionText('')
+  }
+  const addField=()=>{
+    setId(id+1);
+    if(selectBox==='text'){
+    const field={
+      id:id,
+      type:'text',
+      title:title
+    }
+    setSelect([...select,field])
+    
+  }
+  if(selectBox==='checkbox'){
+    const field={
+      id:id,
+      type:'checkbox',
+      title:title,
+      options:option
     
     }
-  const addCheckBox=()=>{
-    const elem={
-      type:'checkbox',
-      field:textData,
-      options:option
-    }
-   setSelect([...select,elem])
-   setcheckBoxwindow(false)
-   setOption([])
+    
+    setSelect([...select,field])
+  }
+
+
   }
 
 const postData= async()=>{
-
-  const input=select.map((item)=>{
-    if(item.type==='text'){
-      return{
-          title:item.field
-      }
-    }
-  })
-  console.log(input)
-  const checkbox=select.map((item)=>{
-    if(item.type==='checkbox'){
-      return{
-          title:item.field,
-          options:item.options
-      }
-    }
-  })
-   const postForm={
-     input:input,
-     chekbox:checkbox
+   const data={
+     fields:select
    }
  const token=localStorage.getItem('token')
  const res= await fetch('http://localhost:5000/createform',{
    method:'POST',
    headers:{'content-type':'application/json',
      token:token},
-     body:JSON.stringify(postForm)
+     body:JSON.stringify(data)
  })
 
 const response=await res.json()
@@ -90,36 +82,99 @@ const response=await res.json()
       {url}
       <h2>Create Your own Custom form</h2>
         <div className='form-builder'>
-          
-          <Button style={{margin:'5px'}} onClick={passData}>Text Input +</Button>
-          <Button style={{margin:'5px'}} onClick={setcheckBoxwindowBool}>Checkbox +</Button><br></br>
+          <Button
+          style={{
+            border:'none',
+            background:'#413df7',
+            paddingLeft:50,
+            paddingRight:50,
+            fontWeight:600,
+            color: '#fff',
+            borderRadius:5,
+            cursor:'pointer'
+          }}
+          onClick={setWindowOption}>Create +</Button>
 
+{window?
+         <div className='add-field'>
+           <h1>Add a field</h1>
+           <Row>
+             <Col span={8}></Col>
+             <Col span={8}>
+        
+           <Input placeholder='Title'
+           value={title}
+           onChange={(e)=>setTitle(e.target.value)}
+           style={{
+             margin:5
+           }}
+           />
 
-          {!inputTextField?<></>:<><input type='text' placeholder='Title for input' value={textData} onChange={(e)=>setTextData(e.target.value)}/>
-          <Button style={{margin:'5px'}} onClick={addText}>Add field</Button>
-          </>}
+           <Select
+      defaultValue="Select type"
+           onChange={handleChange}
+       style={{
+       width: 200,
+       margin:10
+       }}
+   
+  >
+    <OptGroup label="select">
+      <Option value="text">Text</Option>
+      <Option value="checkbox">Chekbox</Option>
+    </OptGroup>
+  </Select>
+  
+             </Col>
+             <Col span={8}></Col>
+           </Row>
+      {selectBox==='checkbox'?<><Input
+      style={{width:150,
+      margin:5
+      }}
+      placeholder='Options'
+      value={optionText}
+      onChange={(e)=>setOptionText(e.target.value)}
+      >
+      </Input><Button onClick={addOption}>Add Options</Button>
+      <br></br>
+      <Chekbox options={option} title={title}/>
+      </>:''}
 
-          {!checkBoxwindow?<></>:<><input type='text' placeholder='Title for Checkbox' value={textData} onChange={(e)=>setTextData(e.target.value)}/>
-          <br></br>
-          <input type='text' value={optionText} onChange={(e)=>setOptionText(e.target.value)} placeholder='Option' />
-          <Button style={{margin:'5px'}} onClick={addOption}>Add options</Button><br></br>
-          <Button style={{margin:'5px'}} onClick={addCheckBox}>Add field</Button>
-          </>}
-
+      <Button
+             style={{
+              border:'none',
+              background:'#413df7',
+              paddingLeft:50,
+              paddingRight:50,
+              fontWeight:600,
+              color: '#fff',
+              borderRadius:5,
+              cursor:'pointer'
+            }}
+       onClick={addField}>Add Field</Button>
+       </div>:''
+}
           <Row>
           <Col span={8}></Col>
           <Col span={8}>
+
          <div className='form-structure'>
-           <h1>Your Form Structure</h1>
+
           {select.map((item)=>{
             if(item.type==='text'){
             return <>
-           <TextInput placeholder={item.field}/>
+            <div className='form-struct'>
+              <h1>{item.title}</h1>
+           <TextInput placeholder={item.title}/>
+            </div>
             </>
             }
             if(item.type==='checkbox'){
               return <>
-            <Chekbox options={item.options} title={item.field}/>
+              <div className='form-struct'>
+            <Chekbox options={item.options} title={item.title}/>
+              </div>
               </>
               }
           })}
@@ -129,7 +184,7 @@ const response=await res.json()
            </Row>
           <br></br>
         </div>
-        {/*<Chekbox options={['adr','agr']}/>*/}
+     
          <Button onClick={postData} style={{margin:'5px'}}>Generate Form</Button>
     </div>
   )
