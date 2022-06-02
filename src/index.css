@@ -41,7 +41,7 @@ box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
 
 }
 .dashboard{
-  color: #fff;
+
   background: #282D50;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #202342, #282D50);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #202342, #282D50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -63,4 +63,10 @@ box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
 }
 .feature-title{
   color: #fff;
+}
+.form-structure{
+margin-top: 40px ;
+}
+.form-structure label span{
+  color:'#fff'
 }
