@@ -7,8 +7,8 @@ const Chekbox = (props) => {
         console.log(`checked = ${e.target.checked}`);
       };
   return (
-    <div style={{color:'#fff'}}>
-         <h3 style={{color:'#fff'}}>{props.title}</h3>
+    <div>
+         <h3>{props.title}</h3>
         <CheckboxGroup 
         style={{color:'#fff'}}
         onChange={onChange}

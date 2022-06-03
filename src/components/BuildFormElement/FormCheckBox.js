@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Checkbox } from 'antd';
 const FormCheckBox = (props) => {
     const CheckboxGroup = Checkbox.Group;
     const onChange = (e) => {

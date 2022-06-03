@@ -52,7 +52,16 @@ const navigate=useNavigate()
              <p>{found.message}</p>
             <Input status={found.found} placeholder='Username' type='text' value={email} onChange={(e)=>setEmail(e.target.value)}/><br></br>
             <Input status={creStatus} placeholder='Password' type='text' value={password} onChange={(e)=>setPassword(e.target.value)}/><br/>
-            <Button type='primary' onClick={loginUser}>Sign in</Button>
+            <Button    style={{
+            border:'none',
+            background:'#413df7',
+            paddingLeft:50,
+            paddingRight:50,
+            fontWeight:600,
+            color: '#fff',
+            borderRadius:5,
+            cursor:'pointer'
+          }} onClick={loginUser}>Sign in</Button>
         </Form>
         </div>
     </div>

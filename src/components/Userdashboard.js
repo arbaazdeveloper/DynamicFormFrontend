@@ -9,7 +9,7 @@ import Visulization from './userfeatures/Visulization'
 const Userdashboard = () => {
   const [user,setuser]=useState()
   const[currentComp,setCurrentComp]=useState('')
-
+  const [form,setForm]=useState([])
   const setComponent=(comId)=>{
        if(comId===1){
         setCurrentComp(<CreateForm/>)
@@ -36,8 +36,18 @@ const Userdashboard = () => {
     setuser(data.data[0].name)
   
   }
+  const getallForms=async ()=>{
+    const data=await axios.get('http://localhost:5000/getallform',{
+      headers:{
+        token:localStorage.getItem('token')
+      }
+    })
+    setForm(data.data)
+    console.log(form)
+  }
   useEffect(()=>{
     getUser()
+    getallForms()
   },[])
 
 
@@ -47,44 +57,22 @@ const Userdashboard = () => {
          {currentComp===''?
          <div>
          <Row>
-        <Col span={6}></Col>
-      <Col span={6}>
+           {form.map((item)=>{
+             return <Row> <Col span={6}  >
+             <div className='feature-1'onClick={()=>setComponent(1)}>
+               <img src='https://img.freepik.com/free-vector/competent-resume-writing-professional-cv-constructor-online-job-application-profile-creation-african-american-woman-filling-up-digital-form-concept-illustration_335657-2053.jpg?w=2000'/>
+             <h3 className='form-title-icon'>{item.formTitle}</h3>
+             </div>
+             </Col></Row>
+           })}
+
+        <Col span={6}>
         <div className='feature-1'onClick={()=>setComponent(1)}>
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbPXRf0IjgZ7MWOQyYt4ziifdqpkjt4PDZag&usqp=CAU'/>
+        <h2>Create Form</h2>
         </div>
-        <h2 className='feature-title'>Create Form</h2>
-      </Col>
-      <Col span={6} >
-          <div className='feature-1' onClick={()=>setComponent(4)}>
-          <img src='https://img.icons8.com/bubbles/344/edit.png'/>
-        </div>
-        <h2 className='feature-title'>Edit Form</h2>
-      </Col>
-
-      <Col span={6}></Col>
-    </Row>
-
-    <Row>
-        <Col span={6}></Col>
-        
-      <Col span={6}>
-      <div className='feature-1' onClick={()=>setComponent(2)}>
-          <img src='https://www.shareicon.net/data/2015/09/02/94952_table_512x512.png'/>
-        </div>
-        <h2 className='feature-title'>View Responses</h2>
-      </Col>
-      <Col span={6}>
-
-          
-          <div className='feature-1' onClick={()=>setComponent(3)}>
-          <img src='https://img.freepik.com/free-vector/set-elements-chart-infographics-graphs-diagrams-chart-color_90220-326.jpg?w=2000'/>
-        </div>
-        <h2 className='feature-title'>Analyze</h2>
-
-      </Col>
-
-      <Col span={6}></Col>
-    </Row>
+        </Col>
+      </Row>
       </div>:
       currentComp
 }

@@ -31,9 +31,9 @@ box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
 
 }
 .login-container{
-  background: #282D50;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #202342, #282D50);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #202342, #282D50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #c0c6d6; 
+  background: -webkit-linear-gradient(#c0c6d6, #cfd4e1); 
+  background: linear-gradient(#c0c6d6, #cfd4e1);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 100vh; 
   display: flex; 
   flex-direction: column;
@@ -41,24 +41,26 @@ box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
 
 }
 .dashboard{
-  background: #282D50;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #202342, #282D50);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #202342, #282D50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background: #c0c6d6; 
+  background: -webkit-linear-gradient(#c0c6d6, #cfd4e1); 
+  background: linear-gradient(#c0c6d6, #cfd4e1); 
   height: 100vh; 
  
 }
 .feature-1{
   background: #fff;
-  padding: 5px;
-  border-radius: 5px;
-  margin: 5px;
-  padding-top:60px;
-  padding-bottom:60px;
+  padding:1px;
+  border-radius:5px;
+  margin-left: 5px;
+  padding-top:50px;
+ margin-top: 10px;
   cursor: pointer;
+  width:150px;
 }
 .feature-1 img{
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
 .feature-title{
   color: #fff;
@@ -68,4 +70,45 @@ margin-top: 40px ;
 }
 .form-structure label span{
   color:'#fff'
+}
+.form-builder{
+  
+
+}
+.add-field{
+  background: #fff;
+  margin: 5px;
+  padding: 5px;
+  width: 50%;
+  position: relative;
+  left:25%;
+  border-radius: 5px;
+  -webkit-box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+  box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+  
+}
+.form-struct{
+  background: #fff;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+  box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+}
+.btn-btn{
+  border: none;
+  background:#413df7;
+  padding:10px;
+  padding-left:50px;
+  padding-right:50px;
+  font-weight:600;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+.form-title-icon{
+  font-size:15px;
 }
