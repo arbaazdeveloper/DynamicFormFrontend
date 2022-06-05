@@ -3,22 +3,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addData } from '../../../features-redux/BuildFormData'
 import Chekbox from './Chekbox'
-const TextInput = (props) => {
-    const [data,setData]=useState(props.data)
-    const dispatch=useDispatch()
 
-   
+const EditTextInput = (props) => {
+    const [data,setData]=useState(props.data)
+    
   return (
     <div>
-        <h3>{props.title}</h3>
-        <Input placeholder={props.placeholder}
+         <Input placeholder={props.placeholder}
         value={data}
         onChange={(e)=>setData(e.target.value)
         }
         />
-
     </div>
   )
 }
 
-export default TextInput
+export default EditTextInput

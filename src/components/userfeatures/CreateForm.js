@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import TextInput from './form elements/TextInput'
-import { addData } from '../../features-redux/BuildFormData'
-import { useDispatch } from 'react-redux'
 import { Button, Row,Col, Input,Select } from 'antd'
 import Chekbox from './form elements/Chekbox'
 import { useNavigate } from 'react-router-dom'
@@ -21,9 +19,9 @@ const CreateForm = () => {
   const [textData,setTextData]=useState()
   const [formTitle,setFormTitle]=useState()
   const [id,setId]=useState(0)
-  const dispatch=useDispatch()
-  const [uId,setUid]=useState('the')
+  const [uId,setUid]=useState('')
   const [disable,setDisable]=useState(true)
+  const [response,setResponse]=useState([])
   const handleChange=(value)=>{
     setSelectBox(value)
   }
@@ -74,15 +72,14 @@ const postData= async()=>{
      token:token},
      body:JSON.stringify(data)
  })
-
-const response=await res.json()
-// navigate(`/Formurl/${response._id}`)
-console.log(response)
-setUid(response._id)
+setResponse(await res.json())
 
 setDisable(false)
 }
-
+useEffect(()=>{
+  console.log(response._id)
+  setUid(response._id)
+},[response])
 
 
   return (

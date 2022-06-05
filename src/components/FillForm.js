@@ -1,26 +1,45 @@
 import Axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {Button, Row,Col} from 'antd'
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import Text from './BuildFormElement/Text'
-import { memo } from 'react'
 import FormCheckBox from './BuildFormElement/FormCheckBox'
+import { useDispatch, useSelector } from 'react-redux'
+import Submitform from './Submitform'
+import { postData } from '../features-redux/BuildFormData'
 const FillForm = () => {
     const {id}=useParams()
     const [form,setForm]=useState([])
+    const[val,setValue]=useState(1)
+    const text=useRef()
+    const dispatch=useDispatch()
+    const postFormData=useSelector((state)=>state.formBuild.value)
+    const [formData,setFormData]=useState([postFormData])
+    const navigate=useNavigate()
     const getFormData=async()=>{
         const res= await Axios.get(`http://localhost:5000/getform/${id}`)
         setForm(res.data)
-        console.log(form)
+        
     }
-    const test=()=>{
-      
-    }
+
+  
     useEffect(()=>{
         getFormData()
-        test()
-      },[])
- 
+       setFormData(postFormData)
+      },[val])
+
+      const test=(e)=>{
+        e.preventDefault();
+         setValue(val+1)
+
+         setTimeout(()=>{
+            dispatch(postData(form[0]._id))
+            navigate('/thanks')
+         }, 1000)
+        
+     
+      
+    }
   return (
     <div className='dashboard'>
      
@@ -41,7 +60,7 @@ const FillForm = () => {
         return<>
         <div className='form-struct'>
             <h1>{i.title}</h1>
-          <Text placeholder={i.title}/>
+          <Text val={val} placeholder={i.title} ref={text} title={i.title}/>
         </div>
         </>
         }
@@ -49,14 +68,16 @@ const FillForm = () => {
             return<>
             <div className='form-struct'>
             <h1>{i.title}</h1>
-            <FormCheckBox options={i.options}/>
+            <FormCheckBox options={i.options}
+             title={i.title} 
+             val={val}/>
             </div>
         </>
         }
 
     })}
     )}
-    <button className='btn-btn'>
+          <button className='btn-btn' type='submit' onClick={test}>
         Submit
     </button>
       </form>
@@ -64,9 +85,9 @@ const FillForm = () => {
             </Col>
             <Col span={8}></Col>
             </Row>
-     
+       <Submitform val={val} data={postFormData}/>
     </div>
   )
 }
 
-export default memo(FillForm)
+export default FillForm

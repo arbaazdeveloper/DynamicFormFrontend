@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 
 import { Modal, Button } from 'antd';
@@ -6,7 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import { FacebookIcon, FacebookShareButton, WhatsappIcon, WhatsappShareButton } from 'react-share';
 
 const FormUrl = (props) => {
-    const id=props.id
+    const[id,setId]=useState(props.id)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [url,setUrl]=useState(`http://localhost:3000/fillform/${props.id}`)
 
@@ -21,7 +21,10 @@ const FormUrl = (props) => {
     const handleCancel = () => {
       setIsModalVisible(false);
     };
-  
+  useEffect(()=>{
+
+   setUrl(`http://localhost:3000/fillform/${props.id}`)
+  },[props.id])
   return (
     <div className='form-url'>
         <div>
