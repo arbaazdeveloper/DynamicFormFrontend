@@ -12,7 +12,8 @@ const Chekbox = (props) => {
         <CheckboxGroup 
         style={{color:'#fff'}}
         onChange={onChange}
-        options={props.options}></CheckboxGroup>;
+        options={props.options}>
+          </CheckboxGroup>;
     </div>
   )
 }

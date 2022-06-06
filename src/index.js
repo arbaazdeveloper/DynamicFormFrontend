@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import FormBuildReducer from './features-redux/BuildFormData'
+import formEditReducers from './features-redux/EditFormRedux'
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 const store=configureStore({
-  reducer:{formBuild:FormBuildReducer},
+  reducer:{formBuild:FormBuildReducer,
+   formEdit:formEditReducers
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false
   }),

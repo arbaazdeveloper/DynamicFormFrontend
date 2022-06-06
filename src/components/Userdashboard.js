@@ -67,7 +67,7 @@ const Userdashboard = () => {
   }
 const share=(id)=>{
        setIsModalVisible(true)
-       setUrl(`http://localhost:3000/filform/${id}`)
+       setUrl(`http://localhost:3000/fillform/${id}`)
 }
 
 
@@ -88,7 +88,9 @@ const share=(id)=>{
            </div>
            </Link>
            <div className='change-btn'>
+             <Link to='/visualize'>
              <img src='https://assist-nps.com/wp-content/uploads/2017/06/pict-bar-chart-cloud-clipart-vector-stencils-library.png-diagram-flowchart-example.png'></img>
+             </Link>
            </div>
          </div>
          {currentComp===''?

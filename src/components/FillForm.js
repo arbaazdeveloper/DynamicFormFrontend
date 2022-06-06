@@ -16,10 +16,11 @@ const FillForm = () => {
     const postFormData=useSelector((state)=>state.formBuild.value)
     const [formData,setFormData]=useState([postFormData])
     const navigate=useNavigate()
+    
     const getFormData=async()=>{
         const res= await Axios.get(`http://localhost:5000/getform/${id}`)
         setForm(res.data)
-        
+    
     }
 
   
