@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import axios from 'axios';
+import { Row,Col } from 'antd';
 const Visulization = () => {
   const [todayCount,setTodayCount]=useState()
   const [yesterdayCount,setYesterDayCount]=useState()
@@ -33,6 +34,8 @@ series: [{
     }
   return (
     <div>
+      <Row>
+        <Col span={12}>
       <div className='bar-chart'>
       <HighchartsReact highcharts={Highcharts}
       styles={{width:50}}
@@ -40,6 +43,8 @@ series: [{
       >
       </HighchartsReact>
       </div>
+        </Col>
+      </Row>
     </div>
   )
 }
