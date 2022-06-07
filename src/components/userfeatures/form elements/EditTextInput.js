@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addEditData } from '../../../features-redux/EditFormRedux'
 import Chekbox from './Chekbox'
+import { memo } from 'react'
 const { Option, OptGroup } = Select;
 
 const EditTextInput = (props) => {
@@ -18,15 +19,15 @@ const EditTextInput = (props) => {
     }
 
     const setUpdateValue=()=>{
-      console.log('the value of select'+selectBox)
+      console.log('the value of select '+selectBox)
       if(selectBox==='text'){
         const postData={
           id:props.itemId,
           type:'text',
           title:data
       }
+      console.log('the console of if body wit id '+props.itemId)
       dispatch(addEditData(postData))
-      console.log('textbody')
       }
       if(selectBox==='checkbox'){
         const postData={
@@ -88,4 +89,4 @@ const EditTextInput = (props) => {
   )
 }
 
-export default EditTextInput
+export default memo(EditTextInput)

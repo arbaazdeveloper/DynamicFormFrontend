@@ -17,6 +17,8 @@ import Thanks from './components/Thanks';
 import Responselist from './components/Responselist';
 import EditForm from './components/userfeatures/EditForm';
 import Visulization from './components/userfeatures/Visulization';
+import Edit from './components/userfeatures/Edit';
+import Updated from './Updated';
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
       <Route exact path='/responselist' element={<Responselist/>}/>
       <Route exact path='editform/:id' element={<EditForm/>}/>
       <Route exact path='/visualize' element={<Visulization/>}></Route>
+      <Route exact path='/updated' element={<Updated/>}></Route>
       </Routes>
       </BrowserRouter>
      
