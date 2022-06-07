@@ -1,18 +1,48 @@
-import { Input } from 'antd'
+import { Input,Select,Button } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addEditData } from '../../../features-redux/EditFormRedux'
-
 import Chekbox from './Chekbox'
+const { Option, OptGroup } = Select;
 
 const EditTextInput = (props) => {
     const [data,setData]=useState(props.data)
+    const [selectBox,setSelectBox]=useState('text')
     const dispatch=useDispatch()
+    const [optionText,setOptionText]=useState()
+    const[option,setOption]=useState([])
+
+    const handleChange=(value)=>{
+      setSelectBox(value)
+      console.log(selectBox)
+    }
 
     const setUpdateValue=()=>{
-      const postData={type:'text',title:data
-    }
+      console.log('the value of select'+selectBox)
+      if(selectBox==='text'){
+        const postData={
+          id:props.itemId,
+          type:'text',
+          title:data
+      }
       dispatch(addEditData(postData))
+      console.log('textbody')
+      }
+      if(selectBox==='checkbox'){
+        const postData={
+          id:props.itemId,
+          type:'checkbox',
+          title:data,
+          options:option
+        }
+        dispatch(addEditData(postData))
+        console.log('check body')
+      }
+
+    }
+    const addOption=()=>{
+      setOption([...option,optionText])
+      setOptionText('')
     }
     useEffect(()=>{
       if(props.val !== 0){
@@ -27,6 +57,33 @@ const EditTextInput = (props) => {
          onChange={(e)=>setData(e.target.value)
         }
         />
+         <Select
+       defaultValue='text'
+       onChange={handleChange}
+       style={{
+       width: 200,
+       margin:10
+       }}
+  >
+    <OptGroup label="select">
+      <Option value="text">Text</Option>
+      <Option value="checkbox">Chekbox</Option>
+    </OptGroup>
+  </Select>
+
+        {selectBox==='checkbox'?<><Input
+      style={{width:150,
+      margin:5
+      }}
+      placeholder='Options'
+      value={optionText}
+      onChange={(e)=>setOptionText(e.target.value)}
+      >
+      </Input><Button onClick={addOption}>Add Options</Button>
+      <br></br>
+
+      <Chekbox options={option} title={props.title}/>
+      </>:''}
     </div>
   )
 }

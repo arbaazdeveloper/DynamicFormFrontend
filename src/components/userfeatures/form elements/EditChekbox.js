@@ -16,7 +16,7 @@ const EditChekbox = (props) => {
 
   const setUpdateValue=()=>{
     const postData={type:'text',
-    
+
     title:props.title}
     dispatch(addEditData(postData))
   }

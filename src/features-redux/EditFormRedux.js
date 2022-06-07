@@ -4,14 +4,16 @@ export const editSlice=createSlice({
     name:"edit",
     initialState:{value:[]},
     reducers:{
-        addEditData:(state,action)=>{
-            state.value.push(action.payload)
+ addEditData:(state,action)=>{
+ state.value.push(action.payload)
         },
-        updateFormData:async (state,action)=>{
+updateFormData:async (state,action)=>{
+
 const updatedData={
 fields:state.value,
 formTitle:action.payload.data
-            }
+ }
+ console.log(state.value)
  const res=await fetch(`http://localhost:5000/updateform/${action.payload.id}`,{
     method:'PUT',
     headers:{

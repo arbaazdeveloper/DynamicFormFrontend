@@ -193,4 +193,8 @@ margin-top: 40px ;
   background: #fff;
   box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
 }
-
+.calender{
+  margin:20px;
+  margin-left: 30px;
+  padding: auto;
+}
