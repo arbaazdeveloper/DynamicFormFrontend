@@ -1,9 +1,10 @@
 import { Input,Select,Button } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { addEditData } from '../../../features-redux/EditFormRedux'
 import Chekbox from './Chekbox'
 import { memo } from 'react'
+import { editField } from '../../../features-redux/Editform'
 const { Option, OptGroup } = Select;
 
 const EditTextInput = (props) => {
@@ -11,6 +12,7 @@ const EditTextInput = (props) => {
     const [selectBox,setSelectBox]=useState('text')
     const [optionText,setOptionText]=useState()
     const[option,setOption]=useState([])
+    const form=useSelector(state=>state.editForm.value)
 
     const dispatch=useDispatch()
     const handleChange=(value)=>{
@@ -27,7 +29,8 @@ const EditTextInput = (props) => {
       }
       if(postData!==null){
         dispatch(addEditData(postData))
-
+        dispatch(editField({index:props.itemId,type:'text',title:data}))
+     
       }
       }
       if(selectBox==='checkbox'){
@@ -39,6 +42,7 @@ const EditTextInput = (props) => {
         }
         if(postData!==null){
           dispatch(addEditData(postData))
+        
         }
         console.log('check body')
       }
@@ -48,11 +52,12 @@ const EditTextInput = (props) => {
       setOption([...option,optionText])
       setOptionText('')
     }
+  
     useEffect(()=>{
       if(props.val === 1){
         setUpdateValue()
-        console.log('the if body value')
       }
+  
     },[props.val])
   return (
     <div>

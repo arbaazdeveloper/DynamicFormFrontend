@@ -34,7 +34,7 @@ function App() {
       <Route exact path='/response/:id' element={<Responses/>}></Route>
       <Route exact path='/thanks' element={<Thanks/>}></Route>
       <Route exact path='/responselist' element={<Responselist/>}/>
-      <Route exact path='editform/:id' element={<EditForm/>}/>
+      <Route exact path='editform/:id' element={<Edit/>}/>
       <Route exact path='/visualize' element={<Visulization/>}></Route>
       <Route exact path='/updated' element={<Updated/>}></Route>
       </Routes>

@@ -1,40 +1,61 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import  Axios  from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { addValue, editField,deleteField, postUpdatedForm } from '../../features-redux/Editform'
+import { getRequest } from '../Request'
+import Window from '../Window'
+import EditTextInput from './form elements/EditTextInput'
+
 const Edit = () => {
     const {id}=useParams()
-    const [formData,setFormData]=useState([])
-    const [formFields,setFields]=useState()
-    const [values,setValue]=useState([""])
-     const getFormData=async()=>{
-     const res= await Axios.get(`http://localhost:5000/getform/${id}`)
-     setFormData(res.data)
-     setFields(res.data[0].fields)
-    console.log(formFields)
+    const form=useSelector(state=>state.editForm.value)
+    const [val,setVal]=useState(0)
+    const dispatch=useDispatch()
+    const [show,setShow]=useState(true)
+    const navigate=useNavigate()
+    const getForm=async ()=>{
+        const fetchedForm=await getRequest(`getform/${id}`)
+        dispatch(addValue(fetchedForm))
+        
+    }
+    const del=(index)=>{
+        dispatch(deleteField(index))
+        
+    }
+ const update=()=>{
+     setVal(val+1)
+     setShow(false)
+     setTimeout(()=>{
+         dispatch(postUpdatedForm({id:id}))
+       navigate('/updated')
+     },1000)
 
-}
-function handleChange(i,event){
-   const val=[...values]
-   val[i]=event.target.value
-   setFields(val)
-
-}
-useEffect(()=>{
-getFormData()
-},[])
+ }
+    useEffect(()=>{
+        getForm()
+    },[])
   return (
     <div>
-        <form>
-
-        {
-            formFields.map((item,index)=>{
-                return <>
-                    <input type={item.type} value={values || ""} onChange={(e)=>handleChange(index,e)}/>
-                </>
-            })
-          
-        }
-        </form>
+     <h1></h1>
+     <div>
+         <Window />
+         {
+         
+        show?form.map((item)=>item.fields.map((i,index)=>{
+              if(i.type==='text'){
+                  return<div key={i.title}>
+                      <div>
+                      <EditTextInput val={val} itemId={index}  data={i.title}>
+                      </EditTextInput>
+                      <div onClick={()=>del(index)}>delete {index}</div>
+                      </div>
+                  </div> 
+              }
+         })):<div><h1>Updating....</h1></div>
+         
+         }
+      <button onClick={update}>Update</button>
+     </div>
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import { Input,Button,Col,Select,Row } from 'antd'
 import  Axios  from 'axios'
-
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams} from 'react-router-dom'
 import { updateFormData } from '../../features-redux/EditFormRedux'
@@ -24,6 +23,7 @@ const EditForm = () => {
   const [Fieldid,setFieldId]=useState(0)
   const dispatch=useDispatch()
   const navigate=useNavigate()
+  const winRef=useRef(null)
 
   const getFormData=async()=>{
     const res= await Axios.get(`http://localhost:5000/getform/${id}`)
@@ -40,11 +40,15 @@ const getData=(data)=>{
 
 const updateForm=(e)=>{
   e.preventDefault()
-   setVal(1)
-   setTimeout(()=>{
+  setVal(1)
+  setTimeout(()=>{
   dispatch(updateFormData({id:id,data:formTitle}))
   navigate('/updated')
-  },10000)
+  },1000)
+}
+const test=(e)=>{
+   e.preventDefault()
+   winRef.current()
 }
 
 const deleteField=async (Fid)=>{
@@ -54,6 +58,7 @@ const deleteField=async (Fid)=>{
 
 useEffect(()=>{
   getFormData()
+console.log(updatedData)
 },[updatedData,deletedField])
   return (
     <div className='edit'>
@@ -76,7 +81,9 @@ onChange={(e)=>setFormTitle(e.target.value)}
  if(i.type==='text'){
         return<>
         <div className='edit-box'>
-<EditTextInput placeholder={i.title}  title={i.title}   data={i.title} val={val} itemId={i.id} />
+<EditTextInput placeholder={i.title}  title={i.title}
+childFunc={winRef}
+data={i.title} val={val} itemId={i.id} />
  <DeleteOutlined onClick={()=>deleteField(i.id)}/>
         </div>
         </>
@@ -94,7 +101,7 @@ onChange={(e)=>setFormTitle(e.target.value)}
         </>
         }
       })}
- <button className='btn-btn' type='submit' onClick={updateForm}>
+ <button className='btn-btn' type='submit' onClick={test}>
        Update
     </button>
       </form>

@@ -8,13 +8,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import FormBuildReducer from './features-redux/BuildFormData'
 import formEditReducers from './features-redux/EditFormRedux'
 import FormData from './features-redux/FormData';
+import  editForm  from './features-redux/Editform';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 const store=configureStore({
   reducer:{formBuild:FormBuildReducer,
    formEdit:formEditReducers,
-   formData:FormData
+   formData:FormData,
+   editForm:editForm
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false

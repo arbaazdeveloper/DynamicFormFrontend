@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Row,Col, Input, Select ,Checkbox} from 'antd'
+import { useDispatch ,useSelector} from 'react-redux';
+import { addFormField } from '../features-redux/Editform';
 
 const { Option, OptGroup } = Select;
 const Window = (props) => {
     const CheckboxGroup = Checkbox.Group;
+    const form=useSelector(state=>state.editForm.value)
     const [title,setTitle]=useState()
     const [mywindow,setWindow]=useState(false)
     const [selectBox,setSelectBox]=useState()
     const [optionText,setOptionText]=useState()
     const [select,setSelect]=useState([])
     const[option,setOption]=useState([])
-    const [id,setId]=useState(parseInt(props.id))
+    const [id,setId]=useState(0)
+    const dispatch=useDispatch()
     const handleChange=(value)=>{
         setSelectBox(value)
       }
@@ -35,7 +39,10 @@ const Window = (props) => {
           title:title
         }
     setSelect([...select,field])
+    dispatch(addFormField(field))
+    console.log(form)
     props.getData(field)
+    
       }
       if(selectBox==='checkbox'){
         const field={
