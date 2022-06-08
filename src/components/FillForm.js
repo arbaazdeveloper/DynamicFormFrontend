@@ -32,7 +32,6 @@ const FillForm = () => {
       const test=(e)=>{
         e.preventDefault();
          setValue(val+1)
-
          setTimeout(()=>{
             dispatch(postData(form[0]._id))
             navigate('/thanks')

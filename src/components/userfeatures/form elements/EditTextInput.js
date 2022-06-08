@@ -9,25 +9,26 @@ const { Option, OptGroup } = Select;
 const EditTextInput = (props) => {
     const [data,setData]=useState(props.data)
     const [selectBox,setSelectBox]=useState('text')
-    const dispatch=useDispatch()
     const [optionText,setOptionText]=useState()
     const[option,setOption]=useState([])
 
+    const dispatch=useDispatch()
     const handleChange=(value)=>{
       setSelectBox(value)
-      console.log(selectBox)
     }
 
     const setUpdateValue=()=>{
       console.log('the value of select '+selectBox)
       if(selectBox==='text'){
         const postData={
-          id:props.itemId,
+          id:1,
           type:'text',
           title:data
       }
-      console.log('the console of if body wit id '+props.itemId)
-      dispatch(addEditData(postData))
+      if(postData!==null){
+        dispatch(addEditData(postData))
+
+      }
       }
       if(selectBox==='checkbox'){
         const postData={
@@ -36,7 +37,9 @@ const EditTextInput = (props) => {
           title:data,
           options:option
         }
-        dispatch(addEditData(postData))
+        if(postData!==null){
+          dispatch(addEditData(postData))
+        }
         console.log('check body')
       }
 
@@ -46,9 +49,9 @@ const EditTextInput = (props) => {
       setOptionText('')
     }
     useEffect(()=>{
-      if(props.val !== 0){
+      if(props.val === 1){
         setUpdateValue()
-        console.log('the if body')
+        console.log('the if body value')
       }
     },[props.val])
   return (
@@ -71,7 +74,6 @@ const EditTextInput = (props) => {
       <Option value="checkbox">Chekbox</Option>
     </OptGroup>
   </Select>
-
         {selectBox==='checkbox'?<><Input
       style={{width:150,
       margin:5

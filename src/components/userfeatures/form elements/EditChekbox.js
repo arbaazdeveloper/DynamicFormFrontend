@@ -9,7 +9,6 @@ const EditChekbox = (props) => {
   const [checks,setChecks]=useState([])
   const [title,setTitle]=useState(props.title)
   const dispatch=useDispatch()
-
   const onChange = (checkedValues) => {
      setChecks([...checks,checkedValues])
     };

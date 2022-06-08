@@ -1,14 +1,11 @@
 import { Button,Row,Col,Modal} from 'antd'
-import { Space } from 'antd';
 import Icon, { DeleteOutlined ,EditOutlined,ShareAltOutlined} from '@ant-design/icons';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CreateForm from './userfeatures/CreateForm'
-import EditForm from './userfeatures/EditForm'
-import Responses from './userfeatures/Responses'
-import Visulization from './userfeatures/Visulization'
 import { FacebookIcon, FacebookShareButton, WhatsappIcon, WhatsappShareButton } from 'react-share';
+import { getRequest } from './Request';
 
 const Userdashboard = () => {
   const [user,setuser]=useState()
@@ -19,15 +16,6 @@ const Userdashboard = () => {
   const setComponent=(comId)=>{
        if(comId===1){
         setCurrentComp(<CreateForm/>)
-       }
-       if(comId===2){
-        setCurrentComp(<Responses/>)
-       }
-       if(comId===3){
-        setCurrentComp(<Visulization/>)
-       }
-       if(comId===4){
-        setCurrentComp(<EditForm/>)
        }
        if(comId===5){
         setCurrentComp('')
@@ -43,17 +31,13 @@ const Userdashboard = () => {
   
   }
   const getallForms=async ()=>{
-    const data=await axios.get('http://localhost:5000/getallform',{
-      headers:{
-        token:localStorage.getItem('token')
-      }
-    })
-    setForm(data.data)
+    const data=await getRequest('getallform')
+    setForm(data)
+    
     
   }
   const handleOk = () => {
     setIsModalVisible(false);
-   
   };
 
   const handleCancel = () => {

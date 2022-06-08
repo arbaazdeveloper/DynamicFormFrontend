@@ -6,9 +6,8 @@ export const editSlice=createSlice({
     reducers:{
  addEditData:(state,action)=>{
  state.value.push(action.payload)
-        },
+},
 updateFormData:async (state,action)=>{
-
 const updatedData={
 fields:state.value,
 formTitle:action.payload.data
@@ -23,7 +22,7 @@ formTitle:action.payload.data
     body:JSON.stringify(updatedData)
 })
 const response= await res.json()
-console.log(response)
+state.value=[]
         }
      
     }

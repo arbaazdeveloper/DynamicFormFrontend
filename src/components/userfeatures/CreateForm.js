@@ -1,92 +1,52 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import TextInput from './form elements/TextInput'
-import { Button, Row,Col, Input,Select } from 'antd'
+import { Button, Row,Col, Input,Select, message } from 'antd'
+import { postRequest } from '../Request'
 import Chekbox from './form elements/Chekbox'
-import { useNavigate } from 'react-router-dom'
 import FormUrl from '../FormUrl'
-const { Option, OptGroup } = Select;
+import Window from '../Window'
+
 const CreateForm = () => {
-  const [url,setUrl]=useState('')
-  const [myPost,setMyPost]=useState(false)
   const [select,setSelect]=useState([])
-  const [title,setTitle]=useState()
-  const [window,setWindow]=useState(false)
-  const [selectBox,setSelectBox]=useState()
-  const [optionText,setOptionText]=useState()
-  const[option,setOption]=useState([])
-  const navigate=useNavigate()
-  const [textData,setTextData]=useState()
   const [formTitle,setFormTitle]=useState()
-  const [id,setId]=useState(0)
   const [uId,setUid]=useState('')
   const [disable,setDisable]=useState(true)
   const [response,setResponse]=useState([])
-  const handleChange=(value)=>{
-    setSelectBox(value)
-  }
-
-  const setWindowOption=()=>{
-    setWindow(true)
-  }
- 
-  const addOption=()=>{
-    setOption([...option,optionText])
-    setOptionText('')
-  }
-  const addField=()=>{
-    setId(id+1);
-    if(selectBox==='text'){
-    const field={
-      id:id,
-      type:'text',
-      title:title
-    }
-    setSelect([...select,field])
-    
-  }
-  if(selectBox==='checkbox'){
-    const field={
-      id:id,
-      type:'checkbox',
-      title:title,
-      options:option
-    
-    }
-    
-    setSelect([...select,field])
-  }
-
-
-  }
-
+  const[found,setFound]=useState({
+    found:'',
+    message:''
+  })
+const getData=(data)=>{
+    setSelect([...select,data])
+}
 const postData= async()=>{
    const data={
      formTitle:formTitle,
      fields:select
    }
- const token=localStorage.getItem('token')
- const res= await fetch('http://localhost:5000/createform',{
-   method:'POST',
-   headers:{'content-type':'application/json',
-     token:token},
-     body:JSON.stringify(data)
- })
-setResponse(await res.json())
+const res= await postRequest(data,'createform')
+if(res.message==="Form Title is already used"){
+  setFound({
+      found:'error',
+      message:'Title already exists'
+  })
+  return;
+}
 
+setResponse(res)
 setDisable(false)
 }
 useEffect(()=>{
-  console.log(response._id)
-  setUid(response._id)
+setUid(response._id)
 },[response])
-
 
   return (
     <div>
-      {url}
       <h2>Create Your own Custom form</h2>
-      <Input placeholder='Form-title'
+      <p>{found.message}</p>
+      <Input
+      status={found.found}
+      placeholder='Form-title'
       value={formTitle}
       onChange={(e)=>setFormTitle(e.target.value)}
       style={{
@@ -95,85 +55,13 @@ useEffect(()=>{
       }}
       ></Input>
         <div className='form-builder'>
-          <Button
-          style={{
-            border:'none',
-            background:'#413df7',
-            paddingLeft:50,
-            paddingRight:50,
-            fontWeight:600,
-            color: '#fff',
-            borderRadius:5,
-            cursor:'pointer'
-          }}
-          onClick={setWindowOption}>Create +</Button>
+          <Window getData={getData} />
 
-{window?
-         <div className='add-field'>
-           <h1>Add a field</h1>
-           <Row>
-             <Col span={8}></Col>
-             <Col span={8}>
-        
-           <Input placeholder='Title'
-           value={title}
-           onChange={(e)=>setTitle(e.target.value)}
-           style={{
-             margin:5
-           }}
-           />
-
-           <Select
-      defaultValue="Select type"
-           onChange={handleChange}
-       style={{
-       width: 200,
-       margin:10
-       }}
-   
-  >
-    <OptGroup label="select">
-      <Option value="text">Text</Option>
-      <Option value="checkbox">Chekbox</Option>
-    </OptGroup>
-  </Select>
-  
-             </Col>
-             <Col span={8}></Col>
-           </Row>
-      {selectBox==='checkbox'?<><Input
-      style={{width:150,
-      margin:5
-      }}
-      placeholder='Options'
-      value={optionText}
-      onChange={(e)=>setOptionText(e.target.value)}
-      >
-      </Input><Button onClick={addOption}>Add Options</Button>
-      <br></br>
-      <Chekbox options={option} title={title}/>
-      </>:''}
-
-      <Button
-             style={{
-              border:'none',
-              background:'#413df7',
-              paddingLeft:50,
-              paddingRight:50,
-              fontWeight:600,
-              color: '#fff',
-              borderRadius:5,
-              cursor:'pointer'
-            }}
-       onClick={addField}>Add Field</Button>
-       </div>:''
-}
           <Row>
           <Col span={8}></Col>
           <Col span={8}>
 
          <div className='form-structure'>
-
           {select.map((item)=>{
             if(item.type==='text'){
             return <>
