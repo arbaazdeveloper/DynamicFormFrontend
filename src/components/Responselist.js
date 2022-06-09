@@ -18,12 +18,12 @@ const Responselist = () => {
   return (
     <div>
          <div>
+             <h1>Your forms</h1>
              {data.map((item)=>{
-                 return <div className='response-list'>
+                 return <div key={item._id} className='response-list'>
                       <h2>{item.formTitle}</h2>
-                      
                       <div className='btn-groups'>
-                      <button className='response-btn'><Link  to={`/response/${item._id}`}>View Response</Link></button>
+                      <Link className='response-btn' to={`/response/${item._id}`}>View Response</Link>
                       </div>
                      </div>
              })}

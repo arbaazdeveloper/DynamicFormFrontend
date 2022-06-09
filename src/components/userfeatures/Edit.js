@@ -4,14 +4,16 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { addValue, editField,deleteField, postUpdatedForm } from '../../features-redux/Editform'
 import { getRequest } from '../Request'
 import Window from '../Window'
+import EditChekbox from './form elements/EditChekbox'
 import EditTextInput from './form elements/EditTextInput'
+import Icon, { DeleteOutlined} from '@ant-design/icons';
 
 const Edit = () => {
     const {id}=useParams()
     const form=useSelector(state=>state.editForm.value)
     const [val,setVal]=useState(0)
     const dispatch=useDispatch()
-    const [show,setShow]=useState(true)
+
     const navigate=useNavigate()
     const getForm=async ()=>{
         const fetchedForm=await getRequest(`getform/${id}`)
@@ -24,10 +26,9 @@ const Edit = () => {
     }
  const update=()=>{
      setVal(val+1)
-     setShow(false)
      setTimeout(()=>{
          dispatch(postUpdatedForm({id:id}))
-       navigate('/updated')
+         navigate('/updated')
      },1000)
 
  }
@@ -38,23 +39,35 @@ const Edit = () => {
     <div>
      <h1></h1>
      <div>
-         <Window />
+         <Window crrentComp="edit" id={parseInt(form.map((item)=>{return item.fields.lastIndexOf()+1}))}/>
          {
          
-        show?form.map((item)=>item.fields.map((i,index)=>{
+        form.map((item)=>item.fields.map((i,index)=>{
               if(i.type==='text'){
                   return<div key={i.title}>
-                      <div>
-                      <EditTextInput val={val} itemId={index}  data={i.title}>
+                      <div className='edit-box'>
+                      <EditTextInput val={val} itemId={i.id}  data={i.title}>
                       </EditTextInput>
-                      <div onClick={()=>del(index)}>delete {index}</div>
+                      <DeleteOutlined onClick={()=>del(i.id)}></DeleteOutlined>
                       </div>
                   </div> 
               }
-         })):<div><h1>Updating....</h1></div>
+              if(i.type==='checkbox'){
+                return<div key={i.title}>
+                    <div className='edit-box'>
+                    <EditChekbox val={val}
+                     itemId={i.id} 
+                      data={i.title}
+                     options={i.options}>
+                    </EditChekbox>
+                    <DeleteOutlined onClick={()=>del(i.id)}></DeleteOutlined>
+                    </div>
+                </div> 
+            }
+         }))
          
          }
-      <button onClick={update}>Update</button>
+      <button className='btn-btn'onClick={update}>Update</button>
      </div>
     </div>
   )

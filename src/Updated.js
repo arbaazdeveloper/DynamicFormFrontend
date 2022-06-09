@@ -1,8 +1,15 @@
-import React from 'react'
+import { Modal } from 'antd'
+import React, { useEffect,useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Updated = () => {
+
   return (
-    <div>Updated</div>
+    <div>
+       
+        <p>Form Updated</p>
+  
+    </div>
   )
 }
 

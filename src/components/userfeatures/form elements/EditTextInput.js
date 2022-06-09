@@ -4,16 +4,15 @@ import { useDispatch,useSelector } from 'react-redux'
 import { addEditData } from '../../../features-redux/EditFormRedux'
 import Chekbox from './Chekbox'
 import { memo } from 'react'
-import { editField } from '../../../features-redux/Editform'
+import { editField ,addFormField} from '../../../features-redux/Editform'
 const { Option, OptGroup } = Select;
-
 const EditTextInput = (props) => {
     const [data,setData]=useState(props.data)
     const [selectBox,setSelectBox]=useState('text')
     const [optionText,setOptionText]=useState()
     const[option,setOption]=useState([])
     const form=useSelector(state=>state.editForm.value)
-
+    
     const dispatch=useDispatch()
     const handleChange=(value)=>{
       setSelectBox(value)
@@ -23,13 +22,13 @@ const EditTextInput = (props) => {
       console.log('the value of select '+selectBox)
       if(selectBox==='text'){
         const postData={
-          id:1,
+          id:props.itemId,
           type:'text',
           title:data
       }
       if(postData!==null){
-        dispatch(addEditData(postData))
         dispatch(editField({index:props.itemId,type:'text',title:data}))
+        dispatch(addEditData(postData))
      
       }
       }
@@ -41,8 +40,8 @@ const EditTextInput = (props) => {
           options:option
         }
         if(postData!==null){
-          dispatch(addEditData(postData))
-        
+          dispatch(addFormField(postData))
+         // dispatch(addEditData(postData))
         }
         console.log('check body')
       }
@@ -80,7 +79,8 @@ const EditTextInput = (props) => {
     </OptGroup>
   </Select>
         {selectBox==='checkbox'?<><Input
-      style={{width:150,
+      style={{
+      width:150,
       margin:5
       }}
       placeholder='Options'

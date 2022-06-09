@@ -13,7 +13,7 @@ const Window = (props) => {
     const [optionText,setOptionText]=useState()
     const [select,setSelect]=useState([])
     const[option,setOption]=useState([])
-    const [id,setId]=useState(0)
+    const [id,setId]=useState(props.id)
     const dispatch=useDispatch()
     const handleChange=(value)=>{
         setSelectBox(value)
@@ -39,12 +39,16 @@ const Window = (props) => {
           title:title
         }
     setSelect([...select,field])
-    dispatch(addFormField(field))
-    console.log(form)
-    props.getData(field)
+    if(props.crrentComp==="edit"){
+      dispatch(addFormField(field))
+    }
+    if(props.crrentComp==="create"){
+       props.getData(field)
+    }
+
     
       }
-      if(selectBox==='checkbox'){
+ if(selectBox==='checkbox'){
         const field={
           id:id,
           type:'checkbox',
@@ -52,10 +56,15 @@ const Window = (props) => {
           options:option
         
         }
-        props.getData(field)
-
-setSelect([...select,field])
-      }
+//setSelect([...select,field])
+if(props.crrentComp==="edit"){
+  dispatch(addFormField(field))
+}
+if(props.crrentComp==="create"){
+   props.getData(field)
+}
+}
+setWindow(false)
       }
   return (
     <div>

@@ -6,6 +6,7 @@ const Chekbox = (props) => {
     const onChange = (e) => {
         console.log(`checked = ${e.target.checked}`);
       };
+      
   return (
     <div>
          <h3>{props.title}</h3>

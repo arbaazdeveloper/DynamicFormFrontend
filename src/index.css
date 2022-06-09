@@ -49,6 +49,7 @@ box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
  display: flex;
  flex-direction: column;
  text-align: center;
+
  
 }
 .feature-1{
@@ -134,7 +135,7 @@ margin-top: 40px ;
   
 }
 .form-rows{
-   margin-left:63px;
+  margin: auto;
 }
 .response-btn{
   border: none;
@@ -149,8 +150,8 @@ margin-top: 40px ;
 }
 .response-list{
   display: flex;
-  margin: 10px;
-  justify-content: space-around;
+  align-items: center;
+  justify-content:space-between;
 }
 .btn-groups{
   display: contents;
@@ -166,6 +167,7 @@ margin-top: 40px ;
   display: flex;
   justify-content: space-around;
   margin: 5px;
+ 
 }
 .edit{
   display: flex;
@@ -191,10 +193,45 @@ margin-top: 40px ;
   border-radius: 10px;
   width: 100%;
   background: #fff;
-  box-shadow: 10px 11px 22px -6px rgba(0,0,0,0.75);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .calender{
   margin:20px;
   margin-left: 30px;
   padding: auto;
 }
+.ag-theme-alpine .ag-ltr .ag-cell {
+  border-right-width: 100px !important;
+}
+.feature-1{
+  margin-left: 20px;
+  margin:10px;
+  box-shadow: rgba(0, 0, 39, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;}
+ 
+ 
+  .response-list{
+   margin: auto;
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50%;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  }
+  .response-list h2{
+    font-size:20px;
+  }
+  .dashboard{
+    margin: auto;
+  }
+  .calender{
+    background: #fff;
+    padding: 20px;
+    padding-left:30%;
+    height: 90%;
+    border-radius:5px;
+    border-radius: 10px;
+
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -9,8 +9,8 @@ const Responses = () => {
   const [rowData,setRowData] = useState([]);
 const [columnDefs,setColumnDefs] = useState([])
 const [filterData,setFilterData]=useState([])
-
 const {id}=useParams()
+
 const getData=async ()=>{
   const res=await Axios.get(`http://localhost:5000/getresponse/${id}`)
     const myArray=res.data.map((item)=>{
@@ -36,16 +36,22 @@ const getData=async ()=>{
     }))
 
 }
+
 useEffect(()=>{
 getData()
 },[rowData])
   return (
     <div className='response-data'>
   
-       <div className="ag-theme-alpine" style={{height:600, width:1000,textAlign:'center'}}>
+       <div className="ag-theme-alpine" style={{height:600, width:1000}
+      
+      }>
              <AgGridReact
                rowData={filterData}
-               columnDefs={columnDefs}>
+               columnDefs={columnDefs}
+                
+               >
+              
              </AgGridReact>
            </div>
     </div>

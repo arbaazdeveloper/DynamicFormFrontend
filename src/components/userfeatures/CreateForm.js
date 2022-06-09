@@ -56,7 +56,7 @@ setUid(response._id)
       }}
       ></Input>
         <div className='form-builder'>
-          <Window getData={getData} />
+          <Window getData={getData} id={0} crrentComp="create" />
 
           <Row>
           <Col span={8}></Col>
