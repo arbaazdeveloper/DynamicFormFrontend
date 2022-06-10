@@ -19,12 +19,13 @@ import EditForm from './components/userfeatures/EditForm';
 import Visulization from './components/userfeatures/Visulization';
 import Edit from './components/userfeatures/Edit';
 import Updated from './Updated';
+import Navbar from './components/userfeatures/Navbar';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-   
+   <Navbar />
       <Routes>
       <Route exact path='/' element={<Login/>}></Route>
       <Route exact path='/signup' element={<Signup/>}></Route>

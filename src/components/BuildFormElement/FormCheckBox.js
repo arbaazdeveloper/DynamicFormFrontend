@@ -24,8 +24,11 @@ const FormCheckBox = (props) => {
 
           <CheckboxGroup 
        onChange={onChange}
-       options={props.options}>
-         </CheckboxGroup>;
+       options={props.options}
+       style={{fontWeight:600}}
+       >
+         
+         </CheckboxGroup>
   
     </div>
   )

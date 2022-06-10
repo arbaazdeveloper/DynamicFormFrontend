@@ -12,6 +12,9 @@ export const editForm=createSlice({
             state.value[0].fields[action.payload.index].title=action.payload.title
 
         },
+        editTitle:(state,action)=>{
+            state.value[0].formTitle=action.payload
+        },
         addFormField:(state,action)=>{
             state.value[0].fields.push(action.payload)
         },
@@ -35,5 +38,5 @@ export const editForm=createSlice({
     }
 })
 
-export const {addValue,deleteField,editField,addFormField,postUpdatedForm}=editForm.actions
+export const {addValue,deleteField,editField,addFormField,postUpdatedForm,editTitle}=editForm.actions
 export default editForm.reducer

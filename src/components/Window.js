@@ -13,7 +13,7 @@ const Window = (props) => {
     const [optionText,setOptionText]=useState()
     const [select,setSelect]=useState([])
     const[option,setOption]=useState([])
-    const [id,setId]=useState(props.id)
+    const [id,setId]=useState(props.id+1)
     const dispatch=useDispatch()
     const handleChange=(value)=>{
         setSelectBox(value)

@@ -4,6 +4,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CreateForm from './userfeatures/CreateForm'
+import image from './form-builders.png'
 import { FacebookIcon, FacebookShareButton, WhatsappIcon, WhatsappShareButton } from 'react-share';
 import { getRequest } from './Request';
 
@@ -81,20 +82,29 @@ const share=(id)=>{
          <div className='form-rows'>
          <Row>
            {form.map((item)=>{
-             return <Row key={item._id}> <Col span={4}  >
+             return<Col span={4}>
+               <div className='forms'>
              <div className='feature-1'>
-               <img src='https://img.freepik.com/free-vector/competent-resume-writing-professional-cv-constructor-online-job-application-profile-creation-african-american-woman-filling-up-digital-form-concept-illustration_335657-2053.jpg?w=2000'/>
+               <img src={image}/>
              <h3 className='form-title-icon'>{item.formTitle}</h3>
+        
              <div className='form-features'>
-               <Link to={`/editform/${item._id}`}>
+             
+               <Link to={`/editform/${item._id}`} className='edit-form-btn'>
                <EditOutlined/>
                </Link>
+            <div className='edit-form-btn'>
              <DeleteOutlined onClick={()=>deleteForm(item._id)}/>
+             </div>
+             <div className='edit-form-btn'>
              <ShareAltOutlined onClick={()=>{share(item._id)}}>
              </ShareAltOutlined>
              </div>
              </div>
-             </Col></Row>
+
+             </div>
+               </div>
+             </Col>
            })}
 
         <Col span={6}>
