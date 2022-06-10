@@ -28,7 +28,7 @@ const EditTextInput = (props) => {
       }
       if(postData!==null){
         dispatch(editField({index:props.itemId,type:'text',title:data}))
-        dispatch(addEditData(postData))
+    //    dispatch(addEditData(postData))
      
       }
       }

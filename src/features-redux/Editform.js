@@ -17,7 +17,6 @@ export const editForm=createSlice({
         },
         deleteField:(state,action)=>{
             state.value[0].fields=state.value[0].fields.filter(item=>item.id !== action.payload)
-       
         },
         postUpdatedForm:async (state,action)=>{
            const res=await fetch(`http://localhost:5000/updateform/${action.payload.id}`,{

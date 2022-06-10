@@ -1,7 +1,6 @@
 import React, { useState ,useEffect} from 'react'
 import { Checkbox,Input } from 'antd';
 import { useDispatch } from 'react-redux'
-import { addEditData } from '../../../features-redux/EditFormRedux'
 import { editField } from '../../../features-redux/Editform'
 
 
@@ -19,7 +18,6 @@ const EditChekbox = (props) => {
     };
 
     const setUpdateValue=()=>{
-      console.log('the value of select '+selectBox)
       if(selectBox==='text'){
         const postData={
           id:1,
@@ -27,7 +25,7 @@ const EditChekbox = (props) => {
           title:title
       }
       if(postData!==null){
-      
+        dispatch(editField({index:props.itemId,type:'checkbox',title:title}))
      
       }
       }
@@ -38,10 +36,10 @@ const EditChekbox = (props) => {
           title:title,
           options:option
         }
-        if(postData!==null){
+     
+        console.log(props.itemId)
           dispatch(editField({index:props.itemId,type:'checkbox',title:title}))
-        
-        }
+       
      
       }
 

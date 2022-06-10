@@ -56,7 +56,7 @@ const Window = (props) => {
           options:option
         
         }
-//setSelect([...select,field])
+setSelect([...select,field])
 if(props.crrentComp==="edit"){
   dispatch(addFormField(field))
 }

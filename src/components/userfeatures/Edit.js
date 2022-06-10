@@ -11,6 +11,7 @@ import Icon, { DeleteOutlined} from '@ant-design/icons';
 const Edit = () => {
     const {id}=useParams()
     const form=useSelector(state=>state.editForm.value)
+  
     const [val,setVal]=useState(0)
     const dispatch=useDispatch()
 
@@ -18,6 +19,7 @@ const Edit = () => {
     const getForm=async ()=>{
         const fetchedForm=await getRequest(`getform/${id}`)
         dispatch(addValue(fetchedForm))
+     
         
     }
     const del=(index)=>{
@@ -56,7 +58,7 @@ const Edit = () => {
                 return<div key={i.title}>
                     <div className='edit-box'>
                     <EditChekbox val={val}
-                     itemId={i.id} 
+                     itemId={index} 
                       data={i.title}
                      options={i.options}>
                     </EditChekbox>
