@@ -31,7 +31,7 @@ export const editForm=createSlice({
                body:JSON.stringify(state.value[0])
            })
            const response =await res.json()
-         
+            state.value=response
         }
         
 

@@ -7,7 +7,7 @@ const { Option, OptGroup } = Select;
 const Window = (props) => {
     const CheckboxGroup = Checkbox.Group;
     const form=useSelector(state=>state.editForm.value)
-    const [title,setTitle]=useState()
+    const [title,setTitle]=useState('')
     const [mywindow,setWindow]=useState(false)
     const [selectBox,setSelectBox]=useState()
     const [optionText,setOptionText]=useState()
@@ -26,6 +26,10 @@ const Window = (props) => {
         setOptionText('')
       }
       const addField=()=>{
+        if(title===''){
+          alert('please provide field name')
+          return
+        }
         const fieldFound=select.some(item=>item.title===title)
         if(fieldFound){
             alert('two fields cannot be same')
@@ -64,21 +68,13 @@ if(props.crrentComp==="create"){
    props.getData(field)
 }
 }
+setTitle('')
 setWindow(false)
       }
   return (
-    <div>
+    <div className='window'>
              <Button
-          style={{
-            border:'none',
-            background:'#413df7',
-            paddingLeft:50,
-            paddingRight:50,
-            fontWeight:600,
-            color: '#fff',
-            borderRadius:5,
-            cursor:'pointer'
-          }}
+         
           onClick={setWindowOption}>Create +</Button>
 {mywindow?
          <div className='add-field'>
@@ -130,16 +126,7 @@ setWindow(false)
       </>:<></>}
 
       <Button
-             style={{
-              border:'none',
-              background:'#413df7',
-              paddingLeft:50,
-              paddingRight:50,
-              fontWeight:600,
-              color: '#fff',
-              borderRadius:5,
-              cursor:'pointer'
-            }}
+         
        onClick={addField}>Add Field</Button>
        </div>:<></>
 }

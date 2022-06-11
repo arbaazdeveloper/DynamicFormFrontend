@@ -5,8 +5,8 @@ const Navbar = () => {
   return (
     <div>
         <div className='nav-bar'>
+            
             <div className='logo'><h1>Dynamic Form Generator</h1></div>
-    
         <div className='nav-links'>
             <ul>
                 <li><Link to='/'>Home</Link></li>

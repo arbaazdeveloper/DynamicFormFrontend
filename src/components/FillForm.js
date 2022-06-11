@@ -41,15 +41,14 @@ const FillForm = () => {
       
     }
   return (
-    <div className='dashboard'>
-     
-     <Row>
-     <Col span={8}></Col>
-     <Col span={8}>
-    <div>
+    <div className='dashboard'>   
+    <div className='fill-form'>
         {form.map((item)=>{
             return<>
+            <div className='form-title'>
+
             <h1>{item.formTitle}</h1>
+            </div>
             </>
         })}
 
@@ -82,9 +81,9 @@ const FillForm = () => {
     </button>
       </form>
             </div>
-            </Col>
-            <Col span={8}></Col>
-            </Row>
+       
+          
+          
        <Submitform val={val} data={postFormData}/>
     </div>
   )
