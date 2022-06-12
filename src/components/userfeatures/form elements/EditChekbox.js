@@ -61,10 +61,10 @@ const EditChekbox = (props) => {
   }
       
 
-         <Select
-       defaultValue='checkbox'
-       onChange={handleChange}
-       style={{
+<Select
+ defaultValue='checkbox'
+ onChange={handleChange}
+ style={{
        width: 200,
        margin:10
        }}

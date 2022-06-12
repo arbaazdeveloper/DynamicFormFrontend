@@ -11,7 +11,7 @@ const Visulization = () => {
   const [week,setWeek]=useState();
   const [date,onChangeDate]=useState(new Date())
   const [byDate,setByDate]=useState()
-
+  const [showCal,setShowCal]=useState(false)
  
   const getData= async ()=>{
     const res= await axios.get('http://localhost:5000/countformtoday')
@@ -20,17 +20,22 @@ const Visulization = () => {
     const dateData= await axios.post('http://localhost:5000/countbydate',{
       date:date.toDateString()
     })
-
     setTodayCount(res.data)
     setYesterDayCount(yes.data)
     setWeek(weekAgo.data)
     setByDate(dateData.data)
-    console.log(dateData.data)
-
+  }
+  const show=()=>{
+    if(showCal && onChangeDate){
+      setShowCal(false)
+    }
+    else{
+      setShowCal(true)
+    }
   }
   useEffect(()=>{
      getData()
-     console.log(date)
+
   },[date])
 
   const options = {
@@ -51,27 +56,24 @@ series: [{
   return (
     <div>
       <Row>
+      <Col span={6}/>
         <Col span={12}>
       <div className='bar-chart'>
-        <h1>Created By date</h1>
-        <div className='change-btn'>
+        <div className='calender-btn' onClick={show}>
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZUfR73w3mwZCvpo_sBqwfX-qwgqHaF9f6kQ&usqp=CAU'></img>
-
         </div>
-        <Calendar onChange={onChangeDate} value={date}></Calendar>
-
-      <HighchartsReact highcharts={Highcharts}
-      styles={{width:50}}
-      options={options}
-      >
+        <h1>Created By date</h1>
+      <HighchartsReact highcharts={Highcharts} styles={{width:50}} options={options}>
       </HighchartsReact>
       </div>
         </Col>
-        <Col span={12}>
-          <div className='calender'>
+        <Col span={2}>
         
-          </div>
+       {
+        showCal?<div className='cal'><Calendar  onChange={onChangeDate} value={date}></Calendar></div>:''
+       }
         </Col>
+        
       </Row>
     </div>
   )

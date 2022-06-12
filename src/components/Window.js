@@ -13,7 +13,7 @@ const Window = (props) => {
     const [optionText,setOptionText]=useState()
     const [select,setSelect]=useState([])
     const[option,setOption]=useState([])
-    const [id,setId]=useState(props.id+1)
+    const [id,setId]=useState(props.id)
     const dispatch=useDispatch()
     const handleChange=(value)=>{
         setSelectBox(value)
@@ -67,6 +67,7 @@ if(props.crrentComp==="edit"){
 if(props.crrentComp==="create"){
    props.getData(field)
 }
+setOption([])
 }
 setTitle('')
 setWindow(false)

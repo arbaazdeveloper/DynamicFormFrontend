@@ -16,6 +16,7 @@ const EditTextInput = (props) => {
     const dispatch=useDispatch()
     const handleChange=(value)=>{
       setSelectBox(value)
+      console.log(value)
     }
 
     const setUpdateValue=()=>{
@@ -31,7 +32,7 @@ const EditTextInput = (props) => {
      
       }
       }
-      if(selectBox==='checkbox'){
+      if(selectBox==='changechekbox'){
         const postData={
           id:props.itemId,
           type:'checkbox',
@@ -42,8 +43,8 @@ const EditTextInput = (props) => {
           dispatch(deleteField(props.itemId))
           dispatch(addFormField(postData))
          // dispatch(addEditData(postData))
+         console.log('to chek if it is working')
         }
-        console.log('check body')
       }
 
     }
@@ -75,10 +76,10 @@ const EditTextInput = (props) => {
   >
     <OptGroup label="select">
       <Option value="text">Text</Option>
-      <Option value="checkbox">Chekbox</Option>
+      <Option value="changechekbox">Chekbox</Option>
     </OptGroup>
   </Select>
-        {selectBox==='checkbox'?<><Input
+        {selectBox==='changechekbox'?<><Input
       style={{
       width:150,
       margin:5
