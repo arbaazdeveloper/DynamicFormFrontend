@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Row,Col } from 'antd';
 import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import Acharts from './Acharts';
 const Visulization = () => {
   const [todayCount,setTodayCount]=useState()
   const [yesterdayCount,setYesterDayCount]=useState()
@@ -75,6 +76,7 @@ series: [{
         </Col>
         
       </Row>
+      <Acharts/>
     </div>
   )
 }

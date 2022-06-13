@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from 'react'
 import { Checkbox,Input ,Select} from 'antd';
 import { useDispatch } from 'react-redux'
 import { editField } from '../../../features-redux/Editform'
+import { addEditData } from '../../../features-redux/EditFormRedux';
 
 const { Option, OptGroup } = Select;
 const EditChekbox = (props) => {
@@ -10,7 +11,7 @@ const EditChekbox = (props) => {
   const [title,setTitle]=useState(props.data)
   const[option,setOption]=useState([])
   const [data,setData]=useState(props.data)
-  const [selectBox,setSelectBox]=useState(props.type)
+  const [selectBox,setSelectBox]=useState('checkbox')
    const [optionText,setOptionText]=useState()
 
   const dispatch=useDispatch()
@@ -24,12 +25,13 @@ const EditChekbox = (props) => {
     const setUpdateValue=()=>{
       if(selectBox==='text'){
         const postData={
-          id:1,
+          id:props.itemId,
           type:'text',
           title:title
       }
       if(postData!==null){
-        dispatch(editField({index:props.index,type:'text',title:title}))
+   //     dispatch(editField({index:props.index,type:'text',title:title}))
+   dispatch(addEditData(postData))
       }
       }
       if(selectBox==='checkbox'){
@@ -37,9 +39,10 @@ const EditChekbox = (props) => {
           id:props.itemId,
           type:'checkbox',
           title:title,
-          options:option
+          options:props.options
         }
-     dispatch(editField({index:props.index,type:'checkbox',title:title}))
+   //  dispatch(editField({index:props.index,type:'checkbox',title:title}))
+   dispatch(addEditData(postData))
       }
 
     }

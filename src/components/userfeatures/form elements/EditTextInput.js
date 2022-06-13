@@ -27,8 +27,8 @@ const EditTextInput = (props) => {
           title:data
       }
       if(postData!==null){
-        dispatch(editField({index:props.index,type:'text',title:data}))
-    //    dispatch(addEditData(postData))
+      //  dispatch(editField({index:props.index,type:'text',title:data}))
+        dispatch(addEditData(postData))
      
       }
       }
@@ -40,9 +40,9 @@ const EditTextInput = (props) => {
           options:option
         }
         if(postData!==null){
-          dispatch(deleteField(props.itemId))
-          dispatch(addFormField(postData))
-         // dispatch(addEditData(postData))
+       //   dispatch(deleteField(props.itemId))
+         // dispatch(addFormField(postData))
+          dispatch(addEditData(postData))
          console.log('to chek if it is working')
         }
       }
@@ -66,8 +66,8 @@ const EditTextInput = (props) => {
          onChange={(e)=>setData(e.target.value)
         }
         />
-         <Select
-       defaultValue='text'
+ <Select
+ defaultValue='text'
        onChange={handleChange}
        style={{
        width: 200,

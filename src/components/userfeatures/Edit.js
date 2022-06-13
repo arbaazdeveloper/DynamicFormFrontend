@@ -8,6 +8,7 @@ import EditChekbox from './form elements/EditChekbox'
 import EditTextInput from './form elements/EditTextInput'
 import Icon, { DeleteOutlined} from '@ant-design/icons';
 import { Input } from 'antd'
+import { updateFormData } from '../../features-redux/EditFormRedux'
 
 const Edit = () => {
     const {id}=useParams()
@@ -37,7 +38,8 @@ const Edit = () => {
      dispatch(editTitle(formTitle))
      setVal(val+1)
      setTimeout(()=>{
-         dispatch(postUpdatedForm({id:id}))
+     dispatch(postUpdatedForm({id:id}))
+      dispatch(updateFormData({id:id}))
          navigate('/updated')
      },1000)
 

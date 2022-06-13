@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Row,Col, Input, Select ,Checkbox} from 'antd'
 import { useDispatch ,useSelector} from 'react-redux';
 import { addFormField } from '../features-redux/Editform';
-
+import { v4 as uudidv4} from 'uuid';
 const { Option, OptGroup } = Select;
 const Window = (props) => {
     const CheckboxGroup = Checkbox.Group;
@@ -38,7 +38,7 @@ const Window = (props) => {
         setId(id+1);
         if(selectBox==='text'){
         const field={
-          id:id,
+          id:uudidv4(),
           type:'text',
           title:title
         }
@@ -54,7 +54,7 @@ const Window = (props) => {
       }
  if(selectBox==='checkbox'){
         const field={
-          id:id,
+          id:uudidv4(),
           type:'checkbox',
           title:title,
           options:option
@@ -74,9 +74,7 @@ setWindow(false)
       }
   return (
     <div className='window'>
-             <Button
-         
-          onClick={setWindowOption}>Create +</Button>
+<Button onClick={setWindowOption}>Create +</Button>
 {mywindow?
          <div className='add-field'>
            <h1>Add a field</h1>

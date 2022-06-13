@@ -42,7 +42,7 @@ getData()
 },[rowData])
   return (
     <div className='response-data'>
-  
+     
        <div className="ag-theme-alpine" style={{height:600, width:1000}
       
       }>
