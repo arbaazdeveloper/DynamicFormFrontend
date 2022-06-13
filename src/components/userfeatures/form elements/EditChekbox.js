@@ -1,18 +1,22 @@
 import React, { useState ,useEffect} from 'react'
-import { Checkbox,Input } from 'antd';
+import { Checkbox,Input ,Select} from 'antd';
 import { useDispatch } from 'react-redux'
 import { editField } from '../../../features-redux/Editform'
 
-
+const { Option, OptGroup } = Select;
 const EditChekbox = (props) => {
   const CheckboxGroup = Checkbox.Group;
   const [checks,setChecks]=useState([])
   const [title,setTitle]=useState(props.data)
   const[option,setOption]=useState([])
   const [data,setData]=useState(props.data)
-  const [selectBox,setSelectBox]=useState('checkbox')
+  const [selectBox,setSelectBox]=useState(props.type)
    const [optionText,setOptionText]=useState()
+
   const dispatch=useDispatch()
+  const handleChange=(value)=>{
+    setSelectBox(value)
+  }
   const onChange = (checkedValues) => {
      setChecks([...checks,checkedValues])
     };
@@ -25,8 +29,7 @@ const EditChekbox = (props) => {
           title:title
       }
       if(postData!==null){
-        dispatch(editField({index:props.itemId,type:'checkbox',title:title}))
-     
+        dispatch(editField({index:props.index,type:'text',title:title}))
       }
       }
       if(selectBox==='checkbox'){
@@ -36,11 +39,7 @@ const EditChekbox = (props) => {
           title:title,
           options:option
         }
-     
-        console.log(props.itemId)
-          dispatch(editField({index:props.itemId,type:'checkbox',title:title}))
-       
-     
+     dispatch(editField({index:props.index,type:'checkbox',title:title}))
       }
 
     }
@@ -53,10 +52,30 @@ const EditChekbox = (props) => {
   return (
     <div>
       <Input value={title} onChange={(e)=>setTitle(e.target.value)}></Input>
+      {selectBox==='checkbox'?
          <CheckboxGroup 
          onChange={onChange}
          options={props.options}>
-         </CheckboxGroup>;
+         </CheckboxGroup>
+  :''  
+  }
+      
+
+<Select
+ defaultValue='checkbox'
+ onChange={handleChange}
+ style={{
+       width: 200,
+       margin:10
+       }}
+  >
+ 
+   <OptGroup label="select">
+   <Option value="text">Text</Option>
+   <Option value="checkbox">Chekbox</Option>
+ </OptGroup>
+   
+  </Select>
          
     </div>
   )

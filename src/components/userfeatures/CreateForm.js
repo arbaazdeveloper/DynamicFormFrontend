@@ -9,7 +9,7 @@ import Window from '../Window'
 
 const CreateForm = () => {
   const [select,setSelect]=useState([])
-  const [formTitle,setFormTitle]=useState()
+  const [formTitle,setFormTitle]=useState('')
   const [uId,setUid]=useState('')
   const [disable,setDisable]=useState(true)
   const [response,setResponse]=useState([])
@@ -21,6 +21,13 @@ const getData=(data)=>{
     setSelect([...select,data])
 }
 const postData= async()=>{
+  if(formTitle===''){
+    setFound({
+      found:'error',
+      message:'Title cannot be empty'
+  })
+  return
+  }
    const data={
      formTitle:formTitle,
      fields:select
@@ -44,6 +51,7 @@ setUid(response._id)
   return (
     <div>
       <h2>Create Your own Custom form</h2>
+      <div className='create-title'>
       <p>{found.message}</p>
       <Input
       status={found.found}
@@ -52,9 +60,11 @@ setUid(response._id)
       onChange={(e)=>setFormTitle(e.target.value)}
       style={{
         margin:5,
-        width:300
+        width:'60%',
+        padding:"10px"
       }}
       ></Input>
+      </div>
         <div className='form-builder'>
           <Window getData={getData} id={0} crrentComp="create" />
 
@@ -86,7 +96,7 @@ setUid(response._id)
            </Row>
           <br></br>
         </div>
-     <div>
+     <div className='generate-btn'>
          <Button onClick={postData} style={{margin:'5px'}}>Generate Form</Button>
          <FormUrl id={uId} disabled={disable} />
      </div>

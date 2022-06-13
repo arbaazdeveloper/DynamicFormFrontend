@@ -22,11 +22,14 @@ const Edit = () => {
         const fetchedForm=await getRequest(`getform/${id}`)
         dispatch(addValue(fetchedForm))
         setFormTitle(fetchedForm[0].formTitle)
-       console.log(fetchedForm[0].fields[fetchedForm[0].fields.length-1].id)
-       setFormIndex(fetchedForm[0].fields[fetchedForm[0].fields.length-1].id)
+        // setFormIndex(fetchedForm[0].fields[fetchedForm[0].fields.length-1].id)
+        const newId=await fetchedForm[0].fields.slice(-1)[0].id
+        setFormIndex(newId)
+        console.log(formIndex)
+      
     }
-    const del=(index)=>{
-        dispatch(deleteField(index))
+    const del=(fieldId)=>{
+        dispatch(deleteField(fieldId))
         
     }
  const update=(e)=>{
@@ -41,46 +44,50 @@ const Edit = () => {
  }
     useEffect(()=>{
         getForm()
+       
     },[])
   return (
     <div>
      <h1></h1>
      <div>
+        <h1>Form Title</h1>
          <form>
-
+            <div className='create-title'>
           <Input value={formTitle}
           style={{width:'50%',margin:10}}
            onChange={(e)=>setFormTitle(e.target.value)}/>
-         <Window crrentComp="edit" id={formIndex}/>
-      
+            </div>
+
+         <Window crrentComp="edit" id={formIndex+1}/>
+       <h1>Form Fields</h1>
          {
          
         form.map((item)=>item.fields.map((i,index)=>{
               if(i.type==='text'){
-                  return<div key={i.title}>
+                  return<div>
                       <div className='edit-box'>
-                      <EditTextInput val={val} itemId={i.id}  data={i.title}>
+                      <EditTextInput val={val} itemId={i.id} index={index}  data={i.title}>
                       </EditTextInput>
-                      <DeleteOutlined onClick={()=>del(i.id)}></DeleteOutlined>
+                      <DeleteOutlined className='edit-form-btn' onClick={()=>del(i.id)}></DeleteOutlined>
                       </div>
                   </div> 
               }
               if(i.type==='checkbox'){
-                return<div key={i.title}>
+                return<div>
                     <div className='edit-box'>
                     <EditChekbox val={val}
-                     itemId={index} 
+                    type={i.type}
+                     itemId={i.id}
+                     index={index} 
                       data={i.title}
-                     options={i.options}>
+                      options={i.options}>
                     </EditChekbox>
                     <DeleteOutlined onClick={()=>del(i.id)}></DeleteOutlined>
                     </div>
                 </div> 
             }
-         }))
-         
-         }
-      <button className='btn-btn'onClick={update}>Update</button>
+         }))}
+      <button className='update-btn' onClick={update}>Update</button>
       </form>
      </div>
     </div>

@@ -1,11 +1,12 @@
 import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import 'antd/dist/antd.css';
-import { Input,Form,Button } from 'antd';
+import { Input,Form,Button,Col,Row,Divider} from 'antd';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-    const [email,setEmail]=useState()
-    const [password,setPassword]=useState()
+    const [email,setEmail]=useState('')
+    const [password,setPassword]=useState('')
 
     const [creStatus,setCredStatus]=useState('')
     const [found,setFound]=useState({
@@ -15,6 +16,13 @@ const Login = () => {
 const navigate=useNavigate()
     const loginUser= async (e)=>{
         e.preventDefault()
+        if(email==='' || password===''){
+            setFound({
+                found:'error',
+                message:'Fields cannot be empty'
+            })
+            return
+        }
         const data={
             email:email,
             password:password
@@ -46,23 +54,35 @@ const navigate=useNavigate()
   return (
     <div className='login-container'>
        
-        <div className='login-form'>
-        <Form>
+        <div className=''>
+      
         <h1>Login</h1>
+        <Row>
+            <Col xs={24} xl={12}>
+                <div className='login-form'>
+            <Form>
              <p>{found.message}</p>
-            <Input status={found.found} placeholder='Username' type='text' value={email} onChange={(e)=>setEmail(e.target.value)}/><br></br>
+            <Input status={found.found} placeholder='Username' type='text' required={true} value={email} onChange={(e)=>setEmail(e.target.value)}/><br></br>
             <Input status={creStatus} placeholder='Password' type='text' value={password} onChange={(e)=>setPassword(e.target.value)}/><br/>
-            <Button    style={{
-            border:'none',
-            background:'#413df7',
-            paddingLeft:50,
-            paddingRight:50,
-            fontWeight:600,
-            color: '#fff',
-            borderRadius:5,
-            cursor:'pointer'
-          }} onClick={loginUser}>Sign in</Button>
+            <div className='forgot'>
+            <Link to='/'>Forgot Password</Link><br></br>
+            </div>
+            <Button onClick={loginUser}>Sign in</Button>
+
+            <div>
+                <Divider style={{width:70}}>Or</Divider>
+                <Link to='/signup'>Don't have an account yet? signup here</Link>
+            </div>
         </Form>
+        </div>
+            </Col>
+            <Col xs={24} xl={12}>
+            <img src='https://i.ibb.co/r5SrDHK/login-image.jpg'></img>
+
+          
+            </Col>
+        </Row>
+    
         </div>
     </div>
   )

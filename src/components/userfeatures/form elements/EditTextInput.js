@@ -4,22 +4,22 @@ import { useDispatch,useSelector } from 'react-redux'
 import { addEditData } from '../../../features-redux/EditFormRedux'
 import Chekbox from './Chekbox'
 import { memo } from 'react'
-import { editField ,addFormField} from '../../../features-redux/Editform'
+import { editField ,addFormField,deleteField} from '../../../features-redux/Editform'
 const { Option, OptGroup } = Select;
 const EditTextInput = (props) => {
     const [data,setData]=useState(props.data)
     const [selectBox,setSelectBox]=useState('text')
     const [optionText,setOptionText]=useState()
     const[option,setOption]=useState([])
-    const form=useSelector(state=>state.editForm.value)
+ 
     
     const dispatch=useDispatch()
     const handleChange=(value)=>{
       setSelectBox(value)
+      console.log(value)
     }
 
     const setUpdateValue=()=>{
-      console.log('the value of select '+selectBox)
       if(selectBox==='text'){
         const postData={
           id:props.itemId,
@@ -27,12 +27,12 @@ const EditTextInput = (props) => {
           title:data
       }
       if(postData!==null){
-        dispatch(editField({index:props.itemId,type:'text',title:data}))
+        dispatch(editField({index:props.index,type:'text',title:data}))
     //    dispatch(addEditData(postData))
      
       }
       }
-      if(selectBox==='checkbox'){
+      if(selectBox==='changechekbox'){
         const postData={
           id:props.itemId,
           type:'checkbox',
@@ -40,10 +40,11 @@ const EditTextInput = (props) => {
           options:option
         }
         if(postData!==null){
+          dispatch(deleteField(props.itemId))
           dispatch(addFormField(postData))
          // dispatch(addEditData(postData))
+         console.log('to chek if it is working')
         }
-        console.log('check body')
       }
 
     }
@@ -75,10 +76,10 @@ const EditTextInput = (props) => {
   >
     <OptGroup label="select">
       <Option value="text">Text</Option>
-      <Option value="checkbox">Chekbox</Option>
+      <Option value="changechekbox">Chekbox</Option>
     </OptGroup>
   </Select>
-        {selectBox==='checkbox'?<><Input
+        {selectBox==='changechekbox'?<><Input
       style={{
       width:150,
       margin:5
