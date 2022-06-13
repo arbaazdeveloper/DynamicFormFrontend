@@ -56,7 +56,6 @@ series: [{
         <h1>Created By date</h1>
         <div className='change-btn'>
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZUfR73w3mwZCvpo_sBqwfX-qwgqHaF9f6kQ&usqp=CAU'></img>
-
         </div>
         <Calendar onChange={onChangeDate} value={date}></Calendar>
 
